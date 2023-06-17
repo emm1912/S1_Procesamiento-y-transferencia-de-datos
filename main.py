@@ -2,8 +2,16 @@ import mysql.connector as SQLC
 import csv
 import pandas as pd
 
-# Establishing connection with the SQL
+#Loading csv into pandas and cleaning the data
+df = pd.read_csv('data_prueba_tecnica.csv')                                                         #Leer archivo
+df.loc[df['name'] == 'MiPasajefy', 'company_id'] = 'cbf1c8b09cd5b549416d49d220a40cbd317f952e'       #Definimos la ID de "MiPasajefy"
+df.loc[df['name'] == 'Muebles chidos', 'company_id'] = '8f642dc67fccf861548dfe1c761ce22f795e91f0'   #Definimos la ID de "Muebles Chidos"
+df['amount'] = df['amount'].apply(lambda x: str(x))
+df['amount'] = df['amount'].str.replace('[^\d\.]','', regex=True).astype(float)                      #De columna amount solo dejamos numeros y puntos
+df.dropna(subset=['id'], inplace=True)                                                               #DROPING valores vacios de columna "id"
+df.to_csv('data_prueba_tecnica2.csv')
 
+# Establishing connection with the SQL
 DataBase = SQLC.connect(
     host="192.168.0.201",
     user="root",
@@ -51,7 +59,7 @@ INSERT INTO companies
 VALUES ( %s, %s )
 """
 
-file = open('data_prueba_tecnica.csv')
+file = open('data_prueba_tecnica2.csv')
 csvreader = csv.reader(file)
 header = []
 header = next(csvreader)
@@ -61,35 +69,27 @@ charge_rows_old = []
 companies_rows_new = []
 companies_rows_old = []
 
+#Sending data to MySQL
 for i, row in enumerate(csvreader):
     if bool(row):
         print(i)
-        companies_rows_new = [(row[2], row[1])]
-        # print(companies_rows_new[0][0])
+        companies_rows_new = [(row[3], row[2])]
+        # print(companies_rows_new)
         if companies_rows_new[0][0] not in companies_rows_old:
             Cursor.executemany(insert_companies_query, companies_rows_new)
-            companies_rows_old.append(row[2])
-            # print(companies_rows_old)
-        if row[5] == '':
-            row[5] = None
+            companies_rows_old.append(row[3])
+            print(companies_rows_old)
         if row[6] == '':
             row[6] = None
-        charge_rows_new = [(row[0], row[3], row[4], row[5], row[6], row[2])]
+        if row[7] == '':
+            row[7] = None
+        charge_rows_new = [(row[1], row[4], row[5], row[6], row[7], row[3])]
         # print(charge_rows_new)
         if charge_rows_new != charge_rows_old:
             Cursor.executemany(insert_charges_query, charge_rows_new)
-            charge_rows_old = [(row[0], row[3], row[4], row[5], row[6], row[2])]
+            charge_rows_old = [(row[1], row[4], row[5], row[6], row[7], row[3])]
         DataBase.commit()
 
 file.close()
 
-# select_company_query = "SELECT * FROM companies"
-
-# df = pd.read_csv('data_prueba_tecnica.csv')
-# print(df.head())
-# # print(df['name'].where(df['company_id'] != "cbf1c8b09cd5b549416d49d220a40cbd317f952e"))
-# df.loc[df['name'] == "MiPasajefy", ['company_id']] = 'cbf1c8b09cd5b549416d49d220a40cbd317f952e'
-# # df.loc[df['paid_at'] == "", ['paid_at']] = None/
-# df[['paid_at']] = df[['paid_at']].fillna(None)
-# print(df)
 
