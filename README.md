@@ -85,9 +85,11 @@ caracteres que se habian configurado, otros tenian letras en los costos lo cual 
 Un reto interesante fue darme cuenta que al crear la tabla "companies" las FK (Foreign Keys) que eran las "company_id" para una misma empresa variaban (por ejemplo no
 la contenian estaba vacia ó tenian caracteres incorrectos) lo que llevo a que las limpiara con pandas, fue un interesante ver como pequeños detalles cuentan y mucho.
 Otra experiencia importante fue crear la conexion a la base de datos y darme cuenta que se debia de crear una base de datos nueva, seleccionarla para su uso
-y despues ahí crear y cargar los datos de las tablas, ademas que utilice varios conceptos de bases de datos, SQL y python todo en un solo ejercicio.
-La base de datos que utilice no era mi "localhost", era una computadora en la red local de mi casa por lo que tuve que configurar las ip a esatica para poder trabajar sin
-distracciones.
+y despues ahí crear y cargar los datos de las tablas, ademas que utilice varios conceptos de bases de datos, SQL y python todo en un solo ejercicio. El principal motivo
+por el cual utilice MySQL es poque lo he utilizado en el pasado y tengo una idea de las herramientas que utiliza (MySQLWorkbench), ademas que los puedo utilizar tanto en
+windows como en sistemas Unix.
+La base de datos que utilice no estaba en mi "localhost", era una computadora en la red local de mi casa por lo que tuve que configurar la ip a estatica y alguna que otra
+configuracion de red relacionada.
 
 ## Para finalizar
 El codigo se probo, se llego a cargar los 9996 registros en la base de datos
