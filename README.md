@@ -76,7 +76,7 @@ En el codigo del programa es aqui donde debes modificar tus datos:
 ## Diagrama
 Diagrama resultado de la separacion de los datos, se crearon 2 tablas (companies, charges). Tienen una relación one to many, como se muestra en el diagrama.
 
-![Screenshot](/Images/Diagram.svg)
+![Screenshot](/Images/Diagram.jpg)
 
 ## Comentarios
 
