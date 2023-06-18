@@ -1,5 +1,4 @@
 venv/*
-SCREENSHOTS/*
+Images/*
 .idea/*
-data_prueba_tecnica.csv
 data_prueba_tecnica2.csv
