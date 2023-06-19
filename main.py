@@ -106,6 +106,7 @@ SELECT company_name, amount, created_at
 FROM Test1.charges
 JOIN Test1.companies
 ON charges.company_id = companies.company_id
+WHERE status = "paid"
 ORDER BY created_at
 """
 #Si quisieramos utilizar la vista
