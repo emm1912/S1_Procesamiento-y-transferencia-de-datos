@@ -22,7 +22,7 @@ Estructura del proyecto:
 </code>
 
 
-## Description
+## Descripción
 El codigo toma datos del archivo "data_prueba_tecnica.csv" los limpia y crea un archivo nuevo "data_prueba_tecnica2.csv", ya con estos datos disponibles 
 se conecta a MySQL, se crea una base de datos con el nombre "Test1", acto seguido se crean 2 tablas y se les insertan los datos limpios del archivo #2 CSV. Para finalizar
 se crea una vista llamada "Transactions_Per_Day" la cual une las tablas "charges" y "companies". Por medio de un group by se juntan todas la fechas para poder crear
@@ -35,11 +35,11 @@ El codigo se escribio con IDE PyCharm, se instalaron algunas librerias las cuale
 Accede a esta ventana desde File -> Settings -> Project (name) -> Python Interpreter.
 
 Las librerias necesarias son:
-* mysql-connector-python==8.0.33
-* numpy==1.24.3
-* pandas==2.0.2
+* mysql-connector-python 8.0.33
+* numpy 1.24.3
+* pandas 2.0.2
 
-###### Tambien se puden instalar de manera manual con el archivo "Requirements.txt" si se requiere.
+###### Tambien se pueden instalar de manera manual con el archivo "Requirements.txt" si se requiere.
 
 #### MySQL
 Para instalar MySQL debes de ir a la url http://mysql.com/downloads
